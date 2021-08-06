@@ -28,6 +28,15 @@ app.get('/api/notes', (req, res) => {
   res.json(data);
 });
 
+//POST Route to add notes to db
+app.post('/api/notes', (req, res) =>{
+  const newNote = req.body;
+  let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+  data.push(newNote);
+  fs.writeFileSync('./db/db.json', JSON.stringify(data));
+  res.json(data);
+});
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
