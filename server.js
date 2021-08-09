@@ -25,6 +25,7 @@ app.get('/notes', (req, res) =>
 // GET Route to retrieve notes from db
 app.get('/api/notes', (req, res) => {
   let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+  console.log(`${req.method} request received to get notes`);
   res.json(data);
 });
 
@@ -40,6 +41,7 @@ app.post('/api/notes', (req, res) =>{
     return data;
   });
   fs.writeFileSync('./db/db.json', JSON.stringify(data));
+  console.log(`${req.method} request received to save a note`);
   res.json(data);
 });
 
@@ -54,6 +56,7 @@ app.delete('/api/notes/:id', (req, res) => {
     }
   }
   fs.writeFileSync('./db/db.json', JSON.stringify(data));
+  console.log(`${req.method} request received to delete a note`);
 });
 
 app.listen(PORT, () =>
