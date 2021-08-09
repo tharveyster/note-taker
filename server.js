@@ -28,13 +28,32 @@ app.get('/api/notes', (req, res) => {
   res.json(data);
 });
 
-//POST Route to add notes to db
+// POST Route to add notes to db
 app.post('/api/notes', (req, res) =>{
   const newNote = req.body;
   let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
   data.push(newNote);
+  let idCount = 1;
+  data.forEach((note, index) => {
+    note.id = idCount;
+    idCount++;
+    return data;
+  });
   fs.writeFileSync('./db/db.json', JSON.stringify(data));
   res.json(data);
+});
+
+// DELETE Route to remove notes from the db
+app.delete('/api/notes/:id', (req, res) => {
+  const deleteId = req.params.id;
+  let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+  res.json(data);
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === Number(deleteId)) {
+      data.splice([i], 1);
+    }
+  }
+  fs.writeFileSync('./db/db.json', JSON.stringify(data));
 });
 
 app.listen(PORT, () =>
