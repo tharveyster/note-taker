@@ -35,7 +35,7 @@ app.post('/api/notes', (req, res) =>{
   let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
   data.push(newNote);
   let idCount = 1;
-  data.forEach((note, index) => {
+  data.forEach((note) => {
     note.id = idCount;
     idCount++;
     return data;
