@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require("fs");
 
-const PORT = process.env.port || 3001;
+const port = process.env.PORT || 3001;
 
 const app = express();
 
@@ -59,6 +59,6 @@ app.delete('/api/notes/:id', (req, res) => {
   console.log(`${req.method} request received to delete a note`);
 });
 
-app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT} 🚀`)
+app.listen(port, () =>
+  console.log(`App listening at http://localhost:${port} 🚀`)
 );
